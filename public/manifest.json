@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "MemVault",
+  "description": "Cross-LLM knowledge transfer with local-first conversation memory.",
+  "version": "0.1.0",
+  "permissions": ["activeTab", "tabs", "storage"],
+  "action": {
+    "default_title": "MemVault",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
+      "js": ["content/chatgpt.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["content/gemini.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
